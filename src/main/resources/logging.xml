@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Spring配置的属性 -->
+    <springProperty scope="context" name="appName" source="spring.application.name"/>
+    <springProperty scope="context" name="logstashDestination" source="logstash.destination"/>
+    <!-- 控制台输出 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) %cyan(%logger) - %msg %n</pattern>
+        </encoder>
+    </appender>
+    <!-- 文件输出 -->
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger - %msg %n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>/logs/${appName}/stdout%d{yyyy-MM-dd}.log</FileNamePattern>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+            <MaxHistory>15</MaxHistory>
+        </rollingPolicy>
+    </appender>
+    <!-- 日志平台输出 -->
+    <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>${logstashDestination}</destination>
+        <connectionStrategy>
+            <roundRobin>
+                <connectionTTL>1 minutes</connectionTTL>
+            </roundRobin>
+        </connectionStrategy>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp/>
+                <pattern>
+                    <pattern>
+                        {
+                        "appname": "${appName}",
+                        "thread": "%thread",
+                        "level": "%level",
+                        "logger": "%logger",
+                        "message": "%message",
+                        "exception": "%exception{5}"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+    <logger name="com.alibaba.nacos" level="OFF"></logger>
+    <root level="INFO">
+        <appender-ref ref="file" />
+        <appender-ref ref="logstash" />
+        <appender-ref ref="console" />
+    </root>
+</configuration>
