@@ -12,7 +12,9 @@ package com.ucasp.enter.util;
 public class EntityReflectUtil {
 
 
+    public void trans() {
 
+    }
 
 
 }
