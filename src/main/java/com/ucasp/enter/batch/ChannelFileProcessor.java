@@ -1,6 +1,6 @@
 package com.ucasp.enter.batch;
 
-import com.ucasp.enter.entity.Customer;
+import com.ucasp.enter.entity.ChannelFile;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;
 
@@ -13,11 +13,10 @@ import org.springframework.stereotype.Component;
  * Copyright (c)   xdj
  */
 @Component
-public class BusinessProcessor implements ItemProcessor<Customer, Customer> {
+public class ChannelFileProcessor implements ItemProcessor<ChannelFile, ChannelFile> {
 
     @Override
-    public Customer process(Customer customer) throws Exception {
-        System.out.println(Thread.currentThread().getName()+"++++++++++++++");
-        return customer;
+    public ChannelFile process(ChannelFile channelFile) throws Exception {
+        return channelFile;
     }
 }

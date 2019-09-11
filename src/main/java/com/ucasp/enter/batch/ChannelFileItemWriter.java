@@ -1,6 +1,6 @@
 package com.ucasp.enter.batch;
 
-import com.ucasp.enter.entity.Customer;
+import com.ucasp.enter.entity.ChannelFile;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.stereotype.Component;
 
@@ -15,11 +15,11 @@ import java.util.List;
  * Copyright (c)   xdj
  */
 @Component
-public class FlatMapItemWriter implements ItemWriter<Customer> {
+public class ChannelFileItemWriter implements ItemWriter<ChannelFile> {
     @Override
-    public void write(List<? extends Customer> list) throws Exception {
-        for (Customer customer : list) {
-            System.out.println(customer);
+    public void write(List<? extends ChannelFile> list) throws Exception {
+        for (ChannelFile channelFile : list) {
+            System.out.println(channelFile);
         }
         System.out.println(Thread.currentThread().getName() + "========================");
     }

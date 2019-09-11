@@ -11,7 +11,7 @@ import org.springframework.batch.item.file.mapping.DefaultLineMapper;
  * Copyright (c)   xdj
  */
 
-public class MyDefaultLineMapper<T> extends DefaultLineMapper<T> {
+public class HandleErrorRecord<T> extends DefaultLineMapper<T> {
 
 
     @Override

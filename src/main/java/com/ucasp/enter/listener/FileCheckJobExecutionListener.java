@@ -49,7 +49,6 @@ public class FileCheckJobExecutionListener implements JobExecutionListener {
     @Override
     public void beforeJob(JobExecution jobExecution) {
 
-
         try {
             setFileUtil();
             List<String> names = this.fileUtil.listFTPFiles(this.fileTempOne);
@@ -65,6 +64,7 @@ public class FileCheckJobExecutionListener implements JobExecutionListener {
             // 存储文件到本地
             List<String> fileNames = this.fileUtil.splitFileName(names);
             downloadFileToLocal(fileNames);
+
         } catch (IOException e) {
             log.info("文件校验失败------->", e);
             e.printStackTrace();
@@ -86,7 +86,6 @@ public class FileCheckJobExecutionListener implements JobExecutionListener {
     }
 
     private boolean isCheckFile(List<String> files) throws IOException {
-
 
         boolean checkFile;
         if (!files.isEmpty()) {

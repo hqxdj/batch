@@ -26,22 +26,6 @@ import java.util.stream.Collectors;
 @Slf4j
 public class FileUtil {
 
-//    public static void downLoadFile(String hostname, int port, String username, String password, String ftpPath, String localPath,
-//                                    String fileName) throws IOException {
-//        FTPClient ftpClient = getFtpClient(hostname, port, username, password);
-//        ftpClient.setControlEncoding("UTF-8");
-//        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-//        ftpClient.changeWorkingDirectory(ftpPath);
-//
-//
-//        File localFile = new File(localPath + File.separatorChar + fileName);
-//        OutputStream os = new FileOutputStream(localFile);
-//        ftpClient.retrieveFile(fileName, os);
-//        os.close();
-//        ftpClient.logout();
-//    }
-
-
     private String host;
 
     private int port;
