@@ -2,6 +2,7 @@ package com.ucasp.enter.config;
 
 import com.ucasp.enter.batch.*;
 import com.ucasp.enter.entity.Customer;
+import com.ucasp.enter.listener.FileCheckJobExecutionListener;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -51,6 +52,9 @@ public class BatchConfig {
     @Autowired
     private HandlerDataTasklet handlerDataTasklet;
 
+    @Autowired
+    private FileCheckJobExecutionListener fileCheckJobExecutionListener;
+
 
 
     @Bean
@@ -58,6 +62,7 @@ public class BatchConfig {
         return jobBuilderFactory.get("job")
                 .validator(new DefaultJobParametersValidator())
                 .incrementer(new RunIdIncrementer())
+                .listener(fileCheckJobExecutionListener)
                 .start(channelFlow())
                 .split(threadPoolTaskExecutor())
                 .add(bankFlow())

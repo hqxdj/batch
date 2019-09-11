@@ -11,6 +11,7 @@ import org.springframework.boot.SpringApplication;
 public class ParseApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(ParseApplication.class, args);
 	}
 
