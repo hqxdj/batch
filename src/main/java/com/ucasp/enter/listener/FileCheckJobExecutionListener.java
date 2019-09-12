@@ -7,6 +7,7 @@ import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
@@ -109,7 +110,21 @@ public class FileCheckJobExecutionListener implements JobExecutionListener {
     @Override
     public void afterJob(JobExecution jobExecution) {
         // 批处理完成后删除临时文件
-
+        try {
+            List<String> names = this.fileUtil.listFTPFiles(this.fileTempOne);
+            List<String> fileNames = this.fileUtil.splitFileName(names);
+            Set<String> setNames = new HashSet<>(fileNames);
+            for (String name : setNames) {
+                File file = new File(localFilePath + File.separatorChar + name + ".txt");
+                boolean delete = file.delete();
+                if (!delete) {
+                    log.info("删除临时文件失败文件名{}", file);
+                }
+                log.info("删除临时文件成功文件名{}", file);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }

@@ -1,6 +1,5 @@
 package com.ucasp.enter.batch;
 
-import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.StepListener;
 import org.springframework.batch.core.listener.ItemListenerSupport;
 import org.springframework.stereotype.Component;
@@ -17,13 +16,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class BeforeItemReaderFilter extends ItemListenerSupport implements StepListener {
 
-    private StepExecution stepExecution;
-
 
     public void beforeRead() {
 
         System.out.println("读取前置空值");
     }
 
-
+    @Override
+    public void onReadError(Exception ex) {
+        super.onReadError(ex);
+    }
 }

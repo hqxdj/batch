@@ -1,5 +1,6 @@
 package com.ucasp.enter.util;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +41,14 @@ public class Test {
                 // 获得 entry 的键（重复元素）对应的 Stream
                 .collect(Collectors.toList());
         System.out.println(collect);
+
+    }
+
+    @org.junit.Test
+    public void testDeletFile() {
+        File file = new File("D:/train/1002.txt");
+
+        System.out.println(file.delete());
 
 
     }
