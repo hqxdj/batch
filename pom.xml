@@ -20,7 +20,7 @@
         <docker-repository>cloud</docker-repository>
         <guava-version>21.0</guava-version>
         <cloud-common-version>1.0.0</cloud-common-version>
-        <mysql-connector-version>5.1.47</mysql-connector-version>
+        <mysql-connector-version>8.0.16</mysql-connector-version>
     </properties>
 
     <dependencies>
